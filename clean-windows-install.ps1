@@ -22,5 +22,3 @@ if ( -Not ( Test-Path $registryPath2 ) ) {
 New-ItemProperty -Path $registryPath2 -Name $name2 -Value $value2 -PropertyType DWORD -Force | Out-Null
 
 Invoke-WebRequest -useb https://git.io/debloat | Invoke-Expression
-
-Invoke-RestMethod https://massgrave.dev/get | Invoke-Expression
