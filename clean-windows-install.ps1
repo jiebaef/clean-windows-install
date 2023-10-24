@@ -1,6 +1,13 @@
 # Set-ExecutionPolicy -ExecutionPolicy Restricted -Scope LocalMachine
 # Run script as admin
 
+$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+$isAdmin = $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+if ( -Not ($isAdmin) ) {
+    Write-Error "Please execute this script with admin privileges"
+    exit
+}
+
 $registryPath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds"
 $name = "EnableFeeds"
 $value = "0"
